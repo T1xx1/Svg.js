@@ -2,23 +2,27 @@
 
 # Changelog
 
-### 1.1
-- <new> added `dot();`
-- <new> added `triangle();`
-- <new> added `square();`
+1. [Changelog](#changelog)
+   1. [1.1](#11)
+   2. [1.0](#10)
 
-### 1.0
-- <new> added `set();`
-- <new> added `get();`
-- <new> added `create();`
-- <new> added `append();`
-- <new> added `line();`
-- <new> added `polyline();`
-- <new> added `rect();`
-- <new> added `polygon();`
-- <new> added `ellipse();`
-- <new> added `circle();`
-- <new> added `path();`
-- <new> added `text();`
+## 1.1
+- <add> added `unset`
+- <add> added `triangle`
+- <add> added `square`
+
+## 1.0
+- <add> added `set`
+- <add> added `get`
+- <add> added `create`
+- <add> added `append`
+- <add> added `line`
+- <add> added `polyline`
+- <add> added `rect`
+- <add> added `polygon`
+- <add> added `ellipse`
+- <add> added `circle`
+- <add> added `path`
+- <add> added `text`
 
 <link rel="stylesheet" href="style.css">

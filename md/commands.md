@@ -1,63 +1,103 @@
 [Back](../README.md)
 
 # Commands
-
 1. [Commands](#commands)
-   1. [set();](#set)
-   2. [get();](#get)
-   3. [create();](#create)
-   4. [append();](#append)
-   5. [dot()](#dot)
-   6. [line()](#line)
-   7. [cross()](#cross)
-   8. [polyline()](#polyline)
-   9. [triangle()](#triangle)
-   10. [rect()](#rect)
-   11. [square()](#square)
-   12. [polygon()](#polygon)
-   13. [ellipse()](#ellipse)
-   14. [circle()](#circle)
-   15. [path()](#path)
-   16. [text()](#text)
+   1. [set](#set)
+   2. [>](#)
+   3. [unset](#unset)
+   4. [get](#get)
+   5. [create](#create)
+   6. [append](#append)
+   7. [line](#line)
+   8. [polyline](#polyline)
+   9. [triangle](#triangle)
+   10. [rect](#rect)
+   11. [square](#square)
+   12. [polygon](#polygon)
+   13. [ellipse](#ellipse)
+   14. [circle](#circle)
+   15. [path](#path)
+   16. [text](#text)
 
-## set();
-> params: `svg_node`
+## set
+params: `svg_node`
 
-set `svg_node` as the default svg for editing it
+> set `svg_node` as the default svg for editing it
+> 
+---
 
-## get();
-return the default svg
+## unset
+> unset the default svg
 
-## create();
-> params: `_height`, `_width`, `options`
+---
 
-create a svg tag with specified height: `_height` and width: `_width` and set it as default
+## get
+> return the default svg
 
-## append();
-> params: `_node`
+---
 
-append the default svg to `_node`
+## create
+params: `_height`, `_width`, `options`
 
-## dot()
+> create a svg tag with specified `_height` and `_width` and set it as default
 
-## line()
+---
 
-## cross()
+## append
+params: `_node`
 
-## polyline()
+> append to `_node` the default svg
 
-## triangle()
+---
 
-## rect()
+## line
+params: [`x1`, `y1`], [`x2`, `y2`], `options`
 
-## square()
+> create a line
 
-## polygon()
+---
 
-## ellipse()
+## polyline
+> create a polyline
 
-## circle()
+---
 
-## path()
+## triangle
+> create a triangle
 
-## text()
+---
+
+## rect
+> create a rectagle
+
+---
+
+## square
+> create a square
+
+---
+
+## polygon
+> create a polygon
+
+---
+
+## ellipse
+> create an ellipse
+
+---
+
+## circle
+> create a circle
+
+---
+
+## path
+> create a path
+
+---
+
+## text
+> create a text
+
+<link rel="stylesheet" href="style.css">

@@ -4,13 +4,12 @@ function create_node(_node) {
 
 function setOptions(_node, options = {}) {
      if (options != {}) {
-          for (let option in options) {
-               _node.setAttribute(option, options[option]);
-          }
+          for (let option in options) _node.setAttribute(option, options[option]);
      }
 }
 
-var Svg = {
+const svg = {
+     fixedPoint: undefined,
      height: undefined,
      mid: undefined,
      node: undefined,
@@ -18,21 +17,48 @@ var Svg = {
 
      set: (svg_node) => {
           if (svg_node != undefined) {
-               Svg.node = svg_node;
+               svg.node = svg_node;
 
-               Svg.height = svg_node.getAttribute("height");
-               Svg.width = svg_node.getAttribute("width");
+               svg.height = svg_node.getAttribute("height");
+               svg.width = svg_node.getAttribute("width");
 
-               Svg.mid = (Svg.height + Svg.width) / 2;
-          };
+               let halfHeight = svg.height / 2;
+               let halfWidth = svg.width / 2;
+
+               svg.fixedPoint = {
+                    bottom: {
+                         left: [0, svg.height],
+                         mid: [halfWidth, svg.height],
+                         right: [svg.width, svg.height]
+                    },
+                    centre: [halfWidth, halfHeight],
+                    left: {
+                         mid: [0, halfHeight],
+                    },
+                    right: {
+                         mid: [svg.width, halfHeight]
+                    },
+                    top: {
+                         mid: [halfWidth, 0],
+                         right: [svg.width, 0]
+                    }
+               };
+               svg.mid = (parseInt(svg.height) + parseInt(svg.width)) / 4.1;
+          }
      },
-     get: (property) => {
-          if (Svg[property] == undefined) {
-               return Svg.node;
-          } else return Svg[property];
+     unset: () => {
+          svg.fixedPoint = undefined;
+          svg.height = undefined;
+          svg.mid = undefined;
+          svg.node = undefined;
+          svg.width = undefined;
      },
+     get: () => { return svg.node },
 
-     create: (_height = 100, _width = 100, options = {}) => {
+     create: (_height = 200, _width = 200, options = {
+          "fill": "transparent",
+          "stroke": "black"
+     }) => {
           let svg_node = create_node("svg");
 
           svg_node.setAttribute("height", _height);
@@ -40,23 +66,15 @@ var Svg = {
 
           setOptions(svg_node, options);
 
-          Svg.set(svg_node);
+          svg.set(svg_node);
      },
-     append: (_node) => {
-          if (_node != undefined) {
-               _node.appendChild(Svg.node);
+     append: (_node = document.querySelector("body")) => {
+          _node.appendChild(svg.node);
 
-               Svg.node = undefined;
-          }
+          svg.unset();
      },
 
-     dot: ([cx, cy], r, options = {}) => {
-          options.fill = "black";
-
-          Svg.circle([cx, cy], r, options);
-     },
-
-     line: ([x1, y1], [x2, y2], options = {}) => {
+     line: ([x1, y1] = [0, 0], [x2, y2] = svg.fixedPoint.bottom.right, options = {}) => {
           let line_node = create_node("line");
 
           line_node.setAttribute("x1", x1);
@@ -66,23 +84,22 @@ var Svg = {
 
           setOptions(line_node, options);
 
-          Svg.node.appendChild(line_node);
+          svg.node.appendChild(line_node);
      },
-     cross: () => {},
-     polyline: (points, options = {}) => {
+     polyline: (points = String([0, 0] + " " + svg.fixedPoint.centre + " " + svg.fixedPoint.top.right), options = {}) => {
           let polyline_node = create_node("polyline");
 
           polyline_node.setAttribute("points", points);
 
           setOptions(polyline_node, options);
 
-          Svg.node.appendChild(polyline_node);
+          svg.node.appendChild(polyline_node);
      },
-     
-     triangle: ([x1, y1], [x2, y2], [x3, y3], options = {}) => {
-          Svg.polygon(x1 + "," + y1 + " " + x2 + "," + y2 + " " + x3 + "," + y3, options);
+
+     triangle: ([x1, y1] = svg.fixedPoint.top.mid, [x2, y2] = svg.fixedPoint.bottom.right, [x3, y3] = svg.fixedPoint.bottom.left, options = {}) => {
+          svg.polygon(x1 + "," + y1 + " " + x2 + "," + y2 + " " + x3 + "," + y3, options);
      },
-     rect: ([x, y], width, height, options = {}) => {
+     rect: ([x, y] = [0, 0], width = svg.width, height = svg.height / 2, options = {}) => {
           let rect_node = create_node("rect");
 
           rect_node.setAttribute("x", x);
@@ -92,10 +109,10 @@ var Svg = {
 
           setOptions(rect_node, options);
 
-          Svg.node.appendChild(rect_node);
+          svg.node.appendChild(rect_node);
      },
-     square: ([x, y], side, options = {}) => {
-          Svg.rect([x, y], side, side, options);
+     square: ([x, y] = [0, 0], side = svg.height, options = {}) => {
+          svg.rect([x, y], side, side, options);
      },
      polygon: (points, options = {}) => {
           let polygon_node = create_node("polygon");
@@ -104,10 +121,10 @@ var Svg = {
 
           setOptions(polygon_node, options);
 
-          Svg.node.appendChild(polygon_node);
+          svg.node.appendChild(polygon_node);
      },
 
-     ellipse: ([cx, cy], [rx, ry], options = {}) => {
+     ellipse: ([cx, cy] = svg.fixedPoint.centre, [rx, ry] = [svg.mid, svg.mid / 2], options = {}) => {
           let ellipse_node = create_node("ellipse");
 
           ellipse_node.setAttribute("cx", cx);
@@ -117,9 +134,9 @@ var Svg = {
 
           setOptions(ellipse_node, options);
 
-          Svg.node.appendChild(ellipse_node);
+          svg.node.appendChild(ellipse_node);
      },
-     circle: ([cx, cy], r, options = {}) => {
+     circle: ([cx, cy] = svg.fixedPoint.centre, r = svg.mid, options = {}) => {
           let circle_node = create_node("circle");
 
           circle_node.setAttribute("cx", cx);
@@ -128,7 +145,7 @@ var Svg = {
 
           setOptions(circle_node, options);
 
-          Svg.node.appendChild(circle_node);
+          svg.node.appendChild(circle_node);
      },
 
      path: (d, options = {}) => {
@@ -138,19 +155,21 @@ var Svg = {
 
           setOptions(path_node, options);
 
-          Svg.node.appendChild(path_node);
+          svg.node.appendChild(path_node);
      },
 
-     text: ([x, y], text, options = {}) => {
+     text: ([x, y] = svg.fixedPoint.left.mid, text = "text", options = {
+          "font-size": svg.mid
+     }) => {
           let text_node = create_node("text");
 
           text_node.setAttribute("x", x);
           text_node.setAttribute("y", y);
 
           setOptions(text_node, options);
-          
+
           text_node.innerHTML = text;
 
-          Svg.node.appendChild(text_node);
+          svg.node.appendChild(text_node);
      }
 };

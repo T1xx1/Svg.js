@@ -1,31 +1,31 @@
-# Svg.js
+# svg.js
 
 Create and edit svg tags for your HTML using JavaScript
 
-1. [Svg.js](#svgjs)
+1. [svg.js](#svgjs)
    1. [Getting started](#getting-started)
    2. [Documents](#documents)
 
 ## Getting started
-- Download or clone `Svg.js` from this repository
+- Download or clone `svg.js`
 - Create a `HTML` file
-- Embed `Svg.js` in `HTML`
+- Embed `svg.js` in `HTML`
 ```
-<script src="Svg.js/boot.js"></script>
+<script src="svg.js/boot.js"></script>
 ```
-- Create a `<svg></svg>`
+- Create a svg
 ```
 <script>
-     Svg.create();
+     svg.create();
 </script>
 ```
 - Edit your svg tag using the [commands](md/commands.md)
 - When finished append the svg to a `HTML` node or get it
 ```
 <script>
-     Svg.append(_node);
+     svg.append(_node);
 
-     Svg.get();
+     svg.get();
 </script>
 ```
 
