@@ -55,7 +55,7 @@ const svg = {
      },
      get: () => { return svg.node },
 
-     create: (_height = 200, _width = 200, options = {
+     create: (_height = 150, _width = 150, options = {
           "fill": "transparent",
           "stroke": "black"
      }) => {
@@ -99,7 +99,7 @@ const svg = {
      triangle: ([x1, y1] = svg.fixedPoint.top.mid, [x2, y2] = svg.fixedPoint.bottom.right, [x3, y3] = svg.fixedPoint.bottom.left, options = {}) => {
           svg.polygon(x1 + "," + y1 + " " + x2 + "," + y2 + " " + x3 + "," + y3, options);
      },
-     rect: ([x, y] = [0, 0], width = svg.width, height = svg.height / 2, options = {}) => {
+     rect: ([x, y] = [0, 0], height = svg.height / 2, width = svg.width, options = {}) => {
           let rect_node = create_node("rect");
 
           rect_node.setAttribute("x", x);

@@ -1,10 +1,16 @@
-[Back](../README.md)
+[Back](README.md)
 
 # Changelog
 
-1. [Changelog](#changelog)
-   1. [1.1](#11)
-   2. [1.0](#10)
+<details>
+   <summary>Versions</summary>
+
+   - [1.2](#12)
+   - [1.1](#11)
+   - [1.0](#10)
+</details>
+
+## 1.2
 
 ## 1.1
 - <add> added `unset`
@@ -25,4 +31,6 @@
 - <add> added `path`
 - <add> added `text`
 
-<link rel="stylesheet" href="style.css">
+[Go up](#changelog)
+
+<link rel="stylesheet" href=".info/style.css">

@@ -1,38 +1,33 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
+about: Create a bug report to make things work better
+title: 'Bug'
+labels: 'bug'
 assignees: ''
-
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Description**
+[Describe the bug you found]
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+**Steps to find the bug**
+1. [Go to]
+2. [Click on]
+3. [Scroll down to]
+4. [See the bug]
 
 **Expected behavior**
-A clear and concise description of what you expected to happen.
+[What you expected to happen instead?]
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Screenshots (optional)**
+[If you can add screeshots to make visible the bug]
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+**Desktop (optional):**
+ - OS: []
+ - Browser: []
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+**Smartphone (optional):**
+ - Device: []
+ - Browser: []
 
-**Additional context**
-Add any other context about the problem here.
+**Other**
+[Anything else?]
