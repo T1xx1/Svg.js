@@ -1,22 +1,41 @@
-function create_node(_node) {
-     return document.createElementNS("http://www.w3.org/2000/svg", _node);
+const create_node = (node) => {
+     return document.createElementNS("http://www.w3.org/2000/svg", node);
 }
 
-function setOptions(_node, options = {}) {
+const setOptions = (node, options = {}) => {
      if (options != {}) {
-          for (let option in options) _node.setAttribute(option, options[option]);
+          for (let option in options) node.setAttribute(option, options[option]);
      }
 }
 
 const svg = {
+     parent: document.querySelector("body"),
+
      fixedPoint: undefined,
      height: undefined,
-     mid: undefined,
+     middle: undefined,
      node: undefined,
      width: undefined,
 
-     set: (svg_node) => {
-          if (svg_node != undefined) {
+     create: (height = 150, width = 150, options = {
+          "fill": "transparent",
+          "stroke": "black",
+          "stroke-width": 3
+     }) => {
+          let node = create_node("svg");
+
+          node.setAttribute("height", height);
+          node.setAttribute("width", width);
+
+          setOptions(node, options);
+
+          svg.set.node(node);
+     },
+     get: () => {
+          return svg.node;
+     },
+     set: {
+          node: (svg_node = svg.create()) => {
                svg.node = svg_node;
 
                svg.height = svg_node.getAttribute("height");
@@ -27,54 +46,42 @@ const svg = {
 
                svg.fixedPoint = {
                     bottom: {
-                         left: [0, svg.height],
-                         mid: [halfWidth, svg.height],
-                         right: [svg.width, svg.height]
+                         left: [1, svg.height - 1],
+                         middle: [halfWidth - 1, svg.height - 1],
+                         right: [svg.width - 1, svg.height - 1]
                     },
-                    centre: [halfWidth, halfHeight],
+                    centre: [halfWidth - 1, halfHeight - 1],
                     left: {
-                         mid: [0, halfHeight],
+                         middle: [1, halfHeight - 1]
                     },
                     right: {
-                         mid: [svg.width, halfHeight]
+                         middle: [svg.width - 1, halfHeight - 1]
                     },
                     top: {
-                         mid: [halfWidth, 0],
-                         right: [svg.width, 0]
+                         left: [1, 1],
+                         middle: [halfWidth - 1, 1],
+                         right: [svg.width - 1, 1]
                     }
                };
-               svg.mid = (parseInt(svg.height) + parseInt(svg.width)) / 4.1;
-          }
+
+               svg.middle = (parseInt(svg.height) + parseInt(svg.width)) / 4.1;
+          },
+          parent: (parent = svg.parent) => svg.parent = parent
      },
      unset: () => {
           svg.fixedPoint = undefined;
           svg.height = undefined;
-          svg.mid = undefined;
+          svg.middle = undefined;
           svg.node = undefined;
           svg.width = undefined;
      },
-     get: () => { return svg.node },
-
-     create: (_height = 150, _width = 150, options = {
-          "fill": "transparent",
-          "stroke": "black"
-     }) => {
-          let svg_node = create_node("svg");
-
-          svg_node.setAttribute("height", _height);
-          svg_node.setAttribute("width", _width);
-
-          setOptions(svg_node, options);
-
-          svg.set(svg_node);
-     },
-     append: (_node = document.querySelector("body")) => {
-          _node.appendChild(svg.node);
+     append: (node = svg.parent) => {
+          node.appendChild(svg.node);
 
           svg.unset();
      },
 
-     line: ([x1, y1] = [0, 0], [x2, y2] = svg.fixedPoint.bottom.right, options = {}) => {
+     line: ([x1, y1] = svg.fixedPoint.top.left, [x2, y2] = svg.fixedPoint.bottom.right, options = {}) => {
           let line_node = create_node("line");
 
           line_node.setAttribute("x1", x1);
@@ -86,20 +93,30 @@ const svg = {
 
           svg.node.appendChild(line_node);
      },
-     polyline: (points = String([0, 0] + " " + svg.fixedPoint.centre + " " + svg.fixedPoint.top.right), options = {}) => {
+     polyline: (points = [
+          svg.fixedPoint.top.left,
+          svg.fixedPoint.bottom.middle,
+          svg.fixedPoint.top.right
+     ], options = {}) => {
           let polyline_node = create_node("polyline");
 
-          polyline_node.setAttribute("points", points);
+          let points_string = "";
+
+          for (let point of points) {
+               points_string += point[0] + "," + point[1] + " ";
+          }
+
+          polyline_node.setAttribute("points", points_string);
 
           setOptions(polyline_node, options);
 
           svg.node.appendChild(polyline_node);
      },
 
-     triangle: ([x1, y1] = svg.fixedPoint.top.mid, [x2, y2] = svg.fixedPoint.bottom.right, [x3, y3] = svg.fixedPoint.bottom.left, options = {}) => {
+     triangle: ([x1, y1] = svg.fixedPoint.top.middle, [x2, y2] = svg.fixedPoint.bottom.right, [x3, y3] = svg.fixedPoint.bottom.left, options = {}) => {
           svg.polygon(x1 + "," + y1 + " " + x2 + "," + y2 + " " + x3 + "," + y3, options);
      },
-     rect: ([x, y] = [0, 0], height = svg.height / 2, width = svg.width, options = {}) => {
+     rect: ([x, y] = svg.fixedPoint.top.left, height = svg.height / 2, width = svg.width, options = {}) => {
           let rect_node = create_node("rect");
 
           rect_node.setAttribute("x", x);
@@ -111,7 +128,7 @@ const svg = {
 
           svg.node.appendChild(rect_node);
      },
-     square: ([x, y] = [0, 0], side = svg.height, options = {}) => {
+     square: ([x, y] = svg.fixedPoint.top.left, side = svg.height, options = {}) => {
           svg.rect([x, y], side, side, options);
      },
      polygon: (points, options = {}) => {
@@ -124,7 +141,7 @@ const svg = {
           svg.node.appendChild(polygon_node);
      },
 
-     ellipse: ([cx, cy] = svg.fixedPoint.centre, [rx, ry] = [svg.mid, svg.mid / 2], options = {}) => {
+     ellipse: ([cx, cy] = svg.fixedPoint.centre, [rx, ry] = [svg.middle, svg.middle / 2], options = {}) => {
           let ellipse_node = create_node("ellipse");
 
           ellipse_node.setAttribute("cx", cx);
@@ -136,7 +153,7 @@ const svg = {
 
           svg.node.appendChild(ellipse_node);
      },
-     circle: ([cx, cy] = svg.fixedPoint.centre, r = svg.mid, options = {}) => {
+     circle: ([cx, cy] = svg.fixedPoint.centre, r = svg.middle, options = {}) => {
           let circle_node = create_node("circle");
 
           circle_node.setAttribute("cx", cx);
@@ -158,8 +175,8 @@ const svg = {
           svg.node.appendChild(path_node);
      },
 
-     text: ([x, y] = svg.fixedPoint.left.mid, text = "text", options = {
-          "font-size": svg.mid
+     text: ([x, y] = svg.fixedPoint.left.middle, text = "text", options = {
+          "font-size": svg.middle
      }) => {
           let text_node = create_node("text");
 

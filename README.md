@@ -10,7 +10,7 @@ Create and edit svg tags for your HTML using JavaScript
 - [Changelog](changelog.md)
 
 ## Getting started
-- Download or [clone](https://github.com/T1xx1/svg.js.git) `svg.js`
+- Download or clone `svg.js`
 - Create a `HTML` file
 - Embed `svg.js` in `HTML`
 ```
@@ -26,7 +26,7 @@ Create and edit svg tags for your HTML using JavaScript
 - When finished append the svg to a `HTML` node or get it
 ```
 <script>
-     svg.append(_node);
+     svg.append(node);
 
      svg.get();
 </script>

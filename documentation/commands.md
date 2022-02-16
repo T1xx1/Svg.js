@@ -23,8 +23,6 @@
    - [text](#text)
 </details>
 
-<br>
-
 ## set
 > `svg_node`
 
@@ -37,14 +35,14 @@ unset the default svg
 return the default svg
 
 ## create
-> `_height` `_width` `options`
+> `height` `width` `options`
 
-create a svg tag with `_height` and `_width` and set it as default
+create a svg tag with `height` and `width` and set it as default
 
 ## append
-> `_node`
+> `node`
 
-append to `_node` the default svg
+append to `node` the default svg
 
 ## line
 > `x1` `y1` `x2` `y2` `options`

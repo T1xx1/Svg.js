@@ -8,7 +8,7 @@ Options are any other optional parameters passed to the function.
 
 The options will be converted into attributes that wil be applied on the svg shape
 
-> svg.create(_height, _width, `options`);
+> svg.create(height, width, `options`);
 
 Options are passed as objects with attribute and relative value
 
