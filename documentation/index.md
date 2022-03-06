@@ -4,5 +4,4 @@
 
 # Documentation
 - [Commands](commands.md)
-- [Fixed values](fixed_values.md)
 - [Options](options.md)

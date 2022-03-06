@@ -4,23 +4,14 @@
 
 # Options
 
-Options are any other optional parameters passed to the function.
+Options are any other optional parameters to apply they will be converted into attributes that will be applied to the shape.
 
-The options will be converted into attributes that wil be applied on the svg shape
+   - fill
+   - stroke
+   - stroke-width
 
-> svg.create(height, width, `options`);
+```
+new Svg(height, width options)
+```
 
-Options are passed as objects with attribute and relative value
-
-Examples:
-- background
-- color
-- font-size
-- stroke
-- stroke-width
-
-{
-     "background-color": "green"
-}
-
-this will turn the background's shape color green
+Options are passed as an object

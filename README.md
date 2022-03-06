@@ -16,14 +16,14 @@ Create and edit svg tags for your HTML using JavaScript
 ```
 <script src="svg.js/boot.js"></script>
 ```
-- Create a svg
+- Create a `SVG`
 ```
 <script>
-     svg.create();
+     let svg = new Svg;
 </script>
 ```
-- Edit your svg tag
-- When finished append the svg to a `HTML` node or get it
+- Edit your `SVG` tag
+- When finished append the `SVG` to a `HTML` node or get it
 ```
 <script>
      svg.append(node);

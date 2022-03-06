@@ -6,10 +6,10 @@
 <details>
    <summary>Commands</summary>
 
+   - [constructor](#constructor)
    - [set](#set)
-   - [unset](#unset)
    - [get](#get)
-   - [create](#create)
+   - [init](#init)
    - [append](#append)
    - [line](#line)
    - [polyline](#polyline)
@@ -23,21 +23,20 @@
    - [text](#text)
 </details>
 
+## constructor
+> `height` `width` `options`
+
+create a svg tag with `height` and `width` and set it as default
+
+## get
+return the default svg
+
 ## set
 > `svg_node`
 
 set `svg_node` as the default svg for editing it
 
-## unset
-unset the default svg
-
-## get
-return the default svg
-
-## create
-> `height` `width` `options`
-
-create a svg tag with `height` and `width` and set it as default
+## init
 
 ## append
 > `node`
