@@ -1,7 +1,6 @@
-<link rel="stylesheet" href="../.info/style.css">
+<link rel="stylesheet" href="../.ignore/style.css">
 
 [Back](../README.md)
 
 # Documentation
-- [Commands](commands.md)
-- [Options](options.md)
+- [Methods](methods.md)

@@ -1,19 +1,21 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
+about: Suggest an idea for the project
 title: 'Feature'
-labels: 'enhancement'
+labels: ''
 assignees: ''
 ---
+
+# Feature request
 
 **Is related to a problem?**
 [What's the problem?]
 
-**Solution**
+**Solution?**
 [What you wanted to happen instead]
 
-**Other solutions**
+**Other solutions?**
 [Any other solutions?]
 
-**Other**
-[Anything else?]
+**Other?**
+[Anything else]

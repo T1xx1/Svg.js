@@ -6,69 +6,62 @@ const setOptions = (node, options = {}) => {
      for (let option in options) node.setAttribute(option, options[option]);
 };
 
+const get_points = array => {
+     let points = "";
+
+     for (let cordinates of array) points += cordinates[0] + "," + cordinates[1] + " ";
+
+     return points;
+}
+
 class Svg {
      node = undefined;
-
      height = undefined;
      width = undefined;
      middle = undefined;
-
      fixed = undefined;
 
-     constructor(height, width, options) {
-          this.set();
-          this.init(height, width, options);
-     }
-
-     get() {
-          return this.node;
-     }
-     set(node = get_node("svg")) {
-          this.node = node;
-     }
-     init(height = 150, width = 150, options = {
+     constructor(height = 150, width = 150, options = {
           fill: "transparent",
           stroke: "black",
-          "stroke-width": 3
-     }) {
+          "stroke-width": "3px"
+     }) { this.init(height, width, options) }
+
+     get() { return this.node }
+     init(height, width, options) {
+          let error = 1.5;
+          let halfHeight = height / 2;
+          let halfWidth = width / 2;
+
+          this.node = get_node("svg");
           this.node.setAttribute("height", height);
           this.node.setAttribute("width", width);
 
           setOptions(this.node, options);
 
-          this.height = height - 1.5;
-          this.width = width - 1.5;
-
+          this.height = height - error;
+          this.width = width - error;
           this.middle = (height + this.width) / 2;
-
-          let halfHeight = height / 2;
-          let halfWidth = this.width / 2;
-
           this.fixed = {
                bottom: {
-                    left: [1, height - 1],
-                    right: [width - 1, height - 1]
+                    left: [error, height - error],
+                    right: [width - error, height - error]
                },
-               centre: [halfWidth - .5, halfHeight - .5],
+               centre: [halfWidth, halfHeight],
                middle: {
-                    bottom: [halfWidth - 1, height - 1],
-                    left: [1, halfHeight - 1],
-                    right: [width - 1, halfHeight - 1],
-                    top: [halfWidth - 1, 1]
+                    bottom: [halfWidth, height - error],
+                    left: [error, halfHeight],
+                    right: [width - error, halfHeight],
+                    top: [halfWidth, error]
                },
                top: {
-                    left: [1, 1],
-                    right: [width - 1, 1]
+                    left: [error, error],
+                    right: [width - error, error]
                }
           };
      }
 
-     append(node) {
-          document.querySelector(node).appendChild(this.node);
-
-          this.set();
-          this.init();
-     }
+     append(node) { document.querySelector(node).appendChild(this.node) }
 
      line([x1, y1] = this.fixed.top.left, [x2, y2] = this.fixed.bottom.right, options = {}) {
           let line_node = get_node("line");
@@ -88,20 +81,15 @@ class Svg {
           this.fixed.top.right
      ], options = {}) {
           let polyline_node = get_node("polyline");
-          let points_string = "";
 
-          for (let point of points) points_string += point[0] + "," + point[1] + " ";
-
-          polyline_node.setAttribute("points", points_string);
+          polyline_node.setAttribute("points", get_points(points));
 
           setOptions(polyline_node, options);
 
           this.node.appendChild(polyline_node);
      }
 
-     triangle([x1, y1] = this.fixed.middle.top, [x2, y2] = this.fixed.bottom.right, [x3, y3] = this.fixed.bottom.left, options = {}) {
-          this.polygon(x1 + "," + y1 + " " + x2 + "," + y2 + " " + x3 + "," + y3, options);
-     }
+     triangle([x1, y1] = this.fixed.middle.top, [x2, y2] = this.fixed.bottom.right, [x3, y3] = this.fixed.bottom.left, options = {}) { this.polygon([[x1, y1], [x2, y2], [x3, y3]], options) }
      rect([x, y] = this.fixed.top.left, height = this.height / 2, width = this.width, options = {}) {
           let rect_node = get_node("rect");
 
@@ -114,20 +102,23 @@ class Svg {
 
           this.node.appendChild(rect_node);
      }
-     square([x, y] = this.fixed.top.left, side = this.height, options = {}) {
-          this.rect([x, y], side, side, options);
-     }
-     polygon(points, options = {}) {
+     square([x, y] = this.fixed.top.left, side = this.height, options = {}) { this.rect([x, y], side, side, options) }
+     polygon(points = [
+          this.fixed.middle.top,
+          this.fixed.middle.right,
+          this.fixed.middle.bottom,
+          this.fixed.middle.left
+     ], options = {}) {
           let polygon_node = get_node("polygon");
 
-          polygon_node.setAttribute("points", points);
+          polygon_node.setAttribute("points", get_points(points));
 
           setOptions(polygon_node, options);
 
           this.node.appendChild(polygon_node);
      }
 
-     ellipse([cx, cy] = this.fixed.centre, [rx, ry] = [this.middle / 2 - 3, this.middle / 4], options = {}) {
+     ellipse([cx, cy] = this.fixed.centre, [rx, ry] = [this.middle / 2.02, this.middle / 4], options = {}) {
           let ellipse_node = get_node("ellipse");
 
           ellipse_node.setAttribute("cx", cx);
@@ -139,7 +130,7 @@ class Svg {
 
           this.node.appendChild(ellipse_node);
      }
-     circle([cx, cy] = this.fixed.centre, r = this.middle / 2 - 3, options = {}) {
+     circle([cx, cy] = this.fixed.centre, r = this.middle / 2.02, options = {}) {
           let circle_node = get_node("circle");
 
           circle_node.setAttribute("cx", cx);

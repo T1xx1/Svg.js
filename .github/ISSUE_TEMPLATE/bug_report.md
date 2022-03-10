@@ -1,13 +1,15 @@
 ---
 name: Bug report
-about: Create a bug report to make things work better
+about: Create a report to make things work better
 title: 'Bug'
 labels: 'bug'
 assignees: ''
 ---
 
+# Bug report
+
 **Description**
-[Describe the bug you found]
+[Describe the bug]
 
 **Steps to find the bug**
 1. [Go to]
@@ -19,7 +21,7 @@ assignees: ''
 [What you expected to happen instead?]
 
 **Screenshots (optional)**
-[If you can add screeshots to make visible the bug]
+[If you can, add screeshots to make visible the bug]
 
 **Desktop (optional):**
  - OS: []
@@ -29,5 +31,5 @@ assignees: ''
  - Device: []
  - Browser: []
 
-**Other**
-[Anything else?]
+**Other?**
+[Anything else]
