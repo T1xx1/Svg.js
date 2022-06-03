@@ -1,32 +1,31 @@
-<link rel="stylesheet" href=".ignore/style.css">
-
 # Svg.js
 
-Create and edit svg for your HTML using JavaScript
+Create and edit your `svg` for `HTML` using `JavaScript`
 
 ## Index
-- [Documentation](documentation/index.md)
+- [Docs](docs/index.md)
 - [Changelog](changelog.md)
 
 ## Getting started
 - Download or clone `Svg.js`
 - Create a `HTML` file
-- Embed `Svg.js` in `HTML`
-```
-<script src="svg.js/boot.js"></script>
-```
-- Create a `SVG`
-```
-<script>
-     let svg = new Svg();
-</script>
-```
-- Edit your `SVG` tag
-- When finished append the `SVG` to a `HTML` node or get it
-```
-<script>
-     svg.append(node);
+- Embed `Svg.js` in the `HTML`
 
-     svg.get();
-</script>
+```
+<script src='Svg.js/index.js'></script>
+```
+
+- Create the `svg` context
+
+```
+let ctx = new Context();
+```
+
+- Edit your `svg` tag
+- When finished append the `svg` in the `HTML` or get it
+
+```
+ctx.append(node);
+
+ctx.get();
 ```

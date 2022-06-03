@@ -1,4 +1,9 @@
-<link rel="stylesheet" href=".ignore/style.css">
+<style>
+   summary {
+      cursor: pointer;
+      font-size: 1.2rem;
+   }
+</style>
 
 [Back](README.md)
 
@@ -6,39 +11,75 @@
 
 <details>
 	<summary>Versions</summary>
-	<ul>
-		<li><a href="#20">2.0</a></li>
-		<li><a href="#11">1.1</a></li>
-		<li><a href="#10">1.0</a></li>
-	</ul>
+	
+   - [1.0.0](#100)
+   - [0.2.0](#020-•-06032022)
+   - [0.1.1](#011)
+   - [0.1.0](#010-•-alfa-06022022)
 </details>
 
-## 2.0
-   - <edit> edited `create() -> init()`
-   - <delete> deleted `unset()`
-   - <fix> fixed `rect()`
-   - <delete> deleted `set()`
-   - <fix> fixed `polygon()`
-   - <fix> fixed `polyline()`
-   - <fix> fixed `triangle()`
+<details>
+   <summary>Upcoming</summary>
 
-## 1.1
-   - <add> added `unset()`
-   - <add> added `triangle()`
-   - <add> added `square()`
+   - 1.2.1
+     - Version system
+     - Commit messages
+     - Aviable commands
+   - 1.3.0
+     - arc()
+     - subnesting
+     - https://developer.mozilla.org/en-US/docs/Web/SVG/Element?retiredLocale=it
+</details>
 
-## 1.0
-   - <add> added `set()`
-   - <add> added `get()`
-   - <add> added `create()`
-   - <add> added `append()`
-   - <add> added `line()`
-   - <add> added `polyline()`
-   - <add> added `rect()`
-   - <add> added `polygon()`
-   - <add> added `ellipse()`
-   - <add> added `circle()`
-   - <add> added `path()`
-   - <add> added `text()`
+## 1.0.0
+`Added`
+- `class Element`
+- `convertInPoints`
+- `point()`
+
+`Changed`
+- `class Svg()` -> `class Context()`
+
+`Removed`
+- `init()`
+- `reset()`
+
+## 0.2.0 • 06/03/2022
+`Added`
+- `reset()`
+
+`Changed`
+- `create()` -> `init()`
+
+`Fixed`
+- `rect()`
+- `polygon()`
+- `polyline()`
+- `triangle()`
+
+`Removed`
+- `unset()`
+- `set()`
+
+## 0.1.1
+`Added`
+- `unset()`
+- `triangle()`
+- `square()`
+
+## 0.1.0 • Alfa 06/02/2022
+`Added`
+- `set()`
+- `get()`
+- `create()`
+- `append()`
+- `line()`
+- `polyline()`
+- `rect()`
+- `polygon()`
+- `ellipse()`
+- `circle()`
+- `path()`
+- `text()`
 
 [Go up](#changelog)
